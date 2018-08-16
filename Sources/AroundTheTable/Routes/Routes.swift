@@ -1,3 +1,4 @@
+import Foundation
 import Credentials
 import CredentialsFacebook
 import Health
@@ -18,6 +19,8 @@ public class Routes {
     
     /// The persistence layer.
     let persistence: Persistence
+
+public let df: DateFormatter
     
     /// The health checker.
     private let health = Health()
@@ -30,6 +33,8 @@ public class Routes {
      */
     public init(persistence: Persistence) {
         self.persistence = persistence
+self.df = DateFormatter()
+df.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSS"
     }
     
     /**

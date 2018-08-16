@@ -1,3 +1,4 @@
+import Foundation
 import Credentials
 import Kitura
 import KituraSession
@@ -42,6 +43,7 @@ extension Routes {
      Shows the current activities.
      */
     private func activities(request: RouterRequest, response: RouterResponse, next: @escaping () -> Void) throws -> Void {
+        print("\(df.string(from: Date())): Activities handler")
         guard let session = request.session else {
             throw log(ServerError.missingMiddleware(type: Session.self))
         }
@@ -81,7 +83,14 @@ extension Routes {
             throw log(ServerError.invalidState)
         }
         let base = try baseViewModel(for: request)
-        try response.render("activities-\(view)", with: ActivitiesViewModel(base: base, sort: sort, activities: activities))
+
+        print("\(df.string(from: Date())): About to build context")
+let context = try ActivitiesViewModel(base: base, sort: sort, activities: activities)
+        print("\(df.string(from: Date())): Done")
+        print("\(df.string(from: Date())): About to render")
+        try response.render("activities-\(view)", with: context)
+        print("\(df.string(from: Date())): Done")
+	print("The context is: \(context)")
         next()
     }
 }
