@@ -1,15 +1,17 @@
-import AroundTheTable
-import Configuration
-import HeliumLogger
+import Foundation
 import Kitura
+import LoggerAPI
+import HeliumLogger
+import Application
 
-let persistence = try! Persistence()
-let router = Router()
-Routes(persistence: persistence).configure(using: router)
+do {
 
-HeliumLogger.use(.warning)
+    HeliumLogger.use(LoggerMessageType.info)
 
-let configuration = ConfigurationManager().load(.environmentVariables)
-Kitura.addHTTPServer(onPort: configuration.port, with: router)
-print("Starting Kitura on port \(configuration.port)...")
-Kitura.run()
+    let app = try App()
+    try app.run()
+
+} catch let error {
+print(error)
+    Log.error(error.localizedDescription)
+}
