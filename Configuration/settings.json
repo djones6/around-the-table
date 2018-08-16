@@ -4,7 +4,7 @@
         "BUCKET_URL": "https://s3.eu-geo.objectstorage.softlayer.net/aroundthetable-dev"
     },
     "DATABASE": {
-        "URI": "mongodb://localhost:27017/",
+        "URI": "mongodb://localhost:27018/",
         "NAME": "aroundthetable-dev"
     },
     "DEFAULT_COORDINATES": {
